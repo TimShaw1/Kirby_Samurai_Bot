@@ -101,23 +101,6 @@ def get_game_screenshot(dim: list[int]) -> Image:
     else:
         raise ValueError("Window Not found")
     
-def get_egg_screenshot(dim):
-    window = win32gui.FindWindow(None, get_window_name())
-    if window:
-        tup = win32gui.GetWindowPlacement(window)
-        if tup[1] == win32con.SW_SHOWMAXIMIZED:
-            game_dim = copy.deepcopy(dim)
-            game_dim[0] += round(dim[2] / 2.5)
-            game_dim[1] += round(dim[3] / 3.2)
-            game_dim[2] = 32
-            game_dim[3] = round(dim[3] / 2.2)
-
-            return get_screenshot(game_dim)
-        else:
-            raise AssertionError("Window must be maximised")
-    else:
-        raise ValueError("Window Not found")
-    
 def get_dimensions(window_title: str = get_window_name()) -> list[int]:
     """
     Returns the `[x, y, w, h]` dimensions of the window
